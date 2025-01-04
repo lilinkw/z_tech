@@ -25,6 +25,7 @@ export default {
       },
       fontSize: {
         sm: "14px",
+        md: "24px",
         heading: "80px",
         "heading-md": "60px",
       },

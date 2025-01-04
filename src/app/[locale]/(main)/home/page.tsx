@@ -3,6 +3,8 @@ import { Background } from "./components/Background";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { getScopedI18n } from "@/locales/server";
 import Countdown from "./components/Countdown";
+import { cn } from "@/lib/utils";
+import { About } from "./components/About";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -72,16 +74,24 @@ export default async function Home(props: Props) {
     </footer>
   );
 
+  const renderHero = () => (
+    <section className="relative">
+      <Background />
+      <Countdown
+        container={{
+          className: "absolute top-[30%] w-full flex justify-center",
+        }}
+      />
+    </section>
+  );
+
+  const renderAboutUs = () => {};
+
   return (
     <div className="">
-      <div className="relative">
-        <Background />
-        <Countdown
-          container={{
-            className: "absolute top-[30%] w-full flex justify-center",
-          }}
-        />
-      </div>
+      {renderHero()}
+      <br className="mb-[128px]" />
+      <About />
       {renderFooter()}
     </div>
   );

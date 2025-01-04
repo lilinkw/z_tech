@@ -58,6 +58,35 @@ export default {
           placeholder: "Enter your email",
         },
       },
+      about: {
+        description:
+          "Browse our selection of free online games and have a great time without leaving the site! Our Kids Games option also includes game reviews, extensive game cheats and walkthroughs, and much more. We have exclusive free downloads, videos, and articles as well. Etech reviews the most popular kids games from all the most popular video gaming platforms, so you don’t need to search around for fun anywhere else on the Internet. Explore a whole new world of gaming on Etech.",
+        benefits: {
+          info_1: {
+            title: "24 - Hour",
+            description:
+              "24/7 access ensures operators' businesses runs smoothly all year long.",
+          },
+          info_2: {
+            title: "Design",
+            description:
+              "Combining imaginative universes, play dynamics, and unprecedented gameplay, our games transcend the boundaries of the virtual world by weaving innovative gameplay.",
+          },
+          info_3: {
+            title: "Team",
+            description:
+              "Etech is an award-winning, international studio of designers, artists, animators and producers that create content for the biggest names in film and video games.",
+          },
+        },
+        stats: {
+          info_1: {
+            description: "Users",
+          },
+          info_2: {
+            description: "Games",
+          },
+        },
+      },
     },
   },
 } as const;

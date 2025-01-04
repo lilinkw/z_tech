@@ -103,9 +103,9 @@ const Countdown = ({ endTime = defaultTime, container }: ICountdownProps) => {
   return (
     <div className={cn(container?.className)}>
       <div className="flex flex-col items-center">
-        <p className="font-heading font-bolder text-heading text-white">
+        <h1 className="font-heading font-bolder text-heading text-white">
           {heroI18n("title")}
-        </p>
+        </h1>
         {renderCountDownTable()}
       </div>
     </div>
