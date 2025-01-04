@@ -1,9 +1,6 @@
 import Image from "next/image";
 import { Background } from "./components/Background";
-import { Metadata, ResolvingMetadata } from "next/types";
-import { getScopedI18n } from "@/locales/server";
 import Countdown from "./components/Countdown";
-import { cn } from "@/lib/utils";
 import { About } from "./components/About";
 
 type Props = {
@@ -84,8 +81,6 @@ export default async function Home(props: Props) {
       />
     </section>
   );
-
-  const renderAboutUs = () => {};
 
   return (
     <div className="">
