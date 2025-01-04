@@ -78,11 +78,11 @@ const Countdown = ({ endTime = defaultTime, container }: ICountdownProps) => {
         {keysWithColons.map((key, index) => {
           if (key === ETimeUnits.Colon) {
             return (
-              <div className="flex flex-col items-center justify-center">
-                <span
-                  className="font-sans font-bold font-[size:65px]"
-                  key={`${key}-${index}`}
-                >
+              <div
+                key={`${key}-${index}`}
+                className="flex flex-col items-center justify-center"
+              >
+                <span className="font-sans font-bold font-[size:65px]">
                   {":"}
                 </span>
               </div>
