@@ -15,6 +15,8 @@ const enum ETimeUnits {
   Hours = "hours",
   Minutes = "minutes",
   Seconds = "seconds",
+  // * only used for rendering
+  Colon = ":",
 }
 
 const Countdown = ({ endTime = defaultTime, container }: ICountdownProps) => {
@@ -55,19 +57,44 @@ const Countdown = ({ endTime = defaultTime, container }: ICountdownProps) => {
   }, [endTime]);
 
   const renderTimeSlot = (value: number, postfixText: string) => (
-    <div>
-      <span>{value}</span>
-      <span className="ml-1">{postfixText}</span>
-    </div>
+    <>
+      <span className="text-center w-full leading-[64px]">{value}</span>
+      <span className="font-sans text-sm">{postfixText}</span>
+    </>
   );
 
   const renderCountDownTable = useCallback(() => {
+    const keys = Array.from(timeLeft.keys());
+    const keysWithColons: ETimeUnits[] = [];
+    const isLastIndex = (index: number) => index === keys.length - 1;
+    keys.forEach((key, index) => {
+      keysWithColons.push(key);
+      if (!isLastIndex(index)) {
+        keysWithColons.push(ETimeUnits.Colon);
+      }
+    });
     return (
-      <div className="flex gap-4 bg-white text-black text-2xl p-12 rounded-md">
-        {Array.from(timeLeft.keys()).map((key) => {
+      <div className="flex gap-8 bg-white text-black text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
+        {keysWithColons.map((key, index) => {
+          if (key === ETimeUnits.Colon) {
+            return (
+              <div className="flex flex-col items-center justify-center">
+                <span
+                  className="font-sans font-bold font-[size:65px]"
+                  key={`${key}-${index}`}
+                >
+                  {":"}
+                </span>
+              </div>
+            );
+          }
           const timeValue = Number(timeLeft.get(key));
           const text = timeI18n(key, { count: timeValue });
-          return <div key={key}>{renderTimeSlot(timeValue, text)}</div>;
+          return (
+            <div key={key} className="flex flex-col items-center min-w-[60px]">
+              {renderTimeSlot(timeValue, text)}
+            </div>
+          );
         })}
       </div>
     );
@@ -76,7 +103,7 @@ const Countdown = ({ endTime = defaultTime, container }: ICountdownProps) => {
   return (
     <div className={cn(container?.className)}>
       <div className="flex flex-col items-center">
-        <p className="font-heading font-bolder text-[80px] text-white">
+        <p className="font-heading font-bolder text-heading text-white">
           {heroI18n("title")}
         </p>
         {renderCountDownTable()}

@@ -1,9 +1,9 @@
-const VI_DAY = "ngày";
-const VI_MONTH = "tháng";
-const VI_YEAR = "năm";
-const VI_HOUR = "giờ";
-const VI_MINUTE = "phút";
-const VI_SECOND = "giây";
+const VI_DAY = "Ngày";
+const VI_MONTH = "Tháng";
+const VI_YEAR = "Năm";
+const VI_HOUR = "Giờ";
+const VI_MINUTE = "Phút";
+const VI_SECOND = "Giây";
 
 export default {
   common: {
@@ -45,7 +45,12 @@ export default {
         description: "Công ty game hiện đại",
       },
       hero: {
-        title: "We're getting ready",
+        title: "Trò Chơi Sắp Ra Mắt",
+        newsletter: {
+          description:
+            "Chúng tôi sẽ trở lại với một điều tuyệt vời. Để nhận các bản cập nhật mới nhất về trò chơi, vui lòng đăng ký nhận bản tin của chúng tôi.",
+          placeholder: "Địa chỉ email của bạn",
+        },
       },
     },
   },

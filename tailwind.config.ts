@@ -24,7 +24,9 @@ export default {
         bolder: "900",
       },
       fontSize: {
-        text: "14px",
+        sm: "14px",
+        heading: "80px",
+        "heading-md": "60px",
       },
       borderRadius: {
         md: "21px",
