@@ -1,12 +1,11 @@
 import Image from "next/image";
 
-const ELLIPSE_BG = "1296px_725px_at_50%_20%";
-
+const ELLIPSE_BG = "[clip-path:ellipse(1296px_725px_at_50%_20%)]";
 export const Background = () => {
   return (
     <div className="relative">
       <div
-        className={`min-h-[988px] bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat [clip-path:ellipse(${ELLIPSE_BG})]`}
+        className={`min-h-[988px] bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat ${ELLIPSE_BG}`}
       ></div>
       <Image
         className="absolute top-0 left-0"
@@ -14,7 +13,7 @@ export const Background = () => {
         src="/fairy.svg"
         alt="fairy"
         width={938}
-        height={938}
+        height={400}
       />
     </div>
   );

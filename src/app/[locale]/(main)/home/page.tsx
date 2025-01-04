@@ -76,7 +76,11 @@ export default async function Home(props: Props) {
     <div className="">
       <div className="relative">
         <Background />
-        <Countdown />
+        <Countdown
+          container={{
+            className: "absolute top-[30%] w-full flex justify-center",
+          }}
+        />
       </div>
       {renderFooter()}
     </div>

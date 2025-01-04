@@ -21,10 +21,13 @@ export default {
       fontWeight: {
         regular: "400",
         bold: "700",
-        bolder: "900"
+        bolder: "900",
       },
       fontSize: {
         text: "14px",
+      },
+      borderRadius: {
+        md: "21px",
       },
     },
   },
