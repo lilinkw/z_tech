@@ -12,11 +12,14 @@ export default {
     },
   },
   pages: {
-    landing: {
+    home: {
       metadata: {
         title: "Z tech",
         description: "A modern game company",
       },
+      hero: {
+        title: "Trò chơi sắp ra mắt"
+      }
     },
   },
 } as const;

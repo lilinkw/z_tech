@@ -1,8 +1,14 @@
-import { IconCaretDownFilled, IconCheck, IconProps } from "@tabler/icons-react";
+import {
+  IconCaretDownFilled,
+  IconCaretUpFilled,
+  IconCheck,
+  IconProps,
+} from "@tabler/icons-react";
 
 export const Icons = {
   Check: IconCheck,
   Down: IconCaretDownFilled,
+  Up: IconCaretUpFilled,
 };
 type TIconKeys = keyof typeof Icons;
 

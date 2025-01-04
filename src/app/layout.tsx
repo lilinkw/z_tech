@@ -27,8 +27,12 @@ export default async function RootLayout({
       <body className={`${playFair.variable} ${montserrat.variable} `}>
         <Providers>
           <I18nProviderClient locale={locale}>
-            <Header containers={{ className: "sticky top-0 z-50" }} />
-            {children}
+            <main className="min-h-screen gap-16">
+              <Header
+                containers={{ className: "absolute top-0 z-50 w-full" }}
+              />
+              {children}
+            </main>
           </I18nProviderClient>
         </Providers>
       </body>
