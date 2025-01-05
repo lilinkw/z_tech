@@ -5,7 +5,7 @@ import { About } from "./components/About";
 import Games from "./components/Games";
 import React from "react";
 // import dynamic from "next/dynamic";
-import gamesJson from "@/app/data/prominent_games.json";
+import gamesJson from "@/data/prominent_games.json";
 
 // type Props = {
 //   params: Promise<{ id: string }>;
@@ -102,7 +102,8 @@ export default async function Home() {
       <br className="mb-[128px]" />
       <About stats={STATS} />
       <br className="mb-[128px]" />
-      <Games games={gamesJson}/>
+      <Games games={gamesJson} />
+      <br className="mb-[128px]" />
       {renderFooter()}
     </div>
   );
