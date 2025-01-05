@@ -1,3 +1,5 @@
+"use client";
+
 import { chunkArray } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
