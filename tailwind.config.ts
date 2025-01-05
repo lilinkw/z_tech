@@ -12,7 +12,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        text: "#757575",
+        gray: "#757575",
+        "blue-light": "#079BEE",
       },
       fontFamily: {
         heading: ["var(--font-playfair)"],
@@ -26,11 +27,16 @@ export default {
       fontSize: {
         sm: "14px",
         md: "24px",
+        large: "40px",
         heading: "80px",
         "heading-md": "60px",
       },
       borderRadius: {
         md: "21px",
+      },
+      gap: {
+        40: "40px",
+        24: "24px",
       },
     },
   },

@@ -20,6 +20,16 @@ import { About } from "./components/About";
 //   };
 // }
 
+const PUBLISH_TIME = new Date(2025, 3, 1, 0, 0, 0);
+
+const STATS: React.ComponentProps<typeof About>["stats"] = {
+  users: {
+    amount: 600,
+    unit: "M",
+  },
+  games: { amount: 135 },
+};
+
 export default async function Home() {
   const renderFooter = () => (
     <footer className="bg-[#F6F6F6] text-black">
@@ -75,6 +85,7 @@ export default async function Home() {
     <section className="relative">
       <Background />
       <Countdown
+        endTime={PUBLISH_TIME}
         container={{
           className: "absolute top-[30%] w-full flex justify-center",
         }}
@@ -86,7 +97,7 @@ export default async function Home() {
     <div className="">
       {renderHero()}
       <br className="mb-[128px]" />
-      <About />
+      <About stats={STATS} />
       {renderFooter()}
     </div>
   );

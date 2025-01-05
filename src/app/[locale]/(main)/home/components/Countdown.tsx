@@ -5,10 +5,9 @@ import { useScopedI18n } from "@/locales/client";
 import React, { useCallback, useEffect, useState } from "react";
 
 interface ICountdownProps {
-  endTime?: string | Date;
+  endTime: string | Date;
   container?: Pick<React.HTMLAttributes<HTMLDivElement>, "className">;
 }
-const defaultTime = new Date(2025, 3, 1, 0, 0, 0);
 
 const enum ETimeUnits {
   Days = "days",
@@ -19,7 +18,7 @@ const enum ETimeUnits {
   Colon = ":",
 }
 
-const Countdown = ({ endTime = defaultTime, container }: ICountdownProps) => {
+const Countdown = ({ endTime, container }: ICountdownProps) => {
   const heroI18n = useScopedI18n("pages.home.hero");
   const timeI18n = useScopedI18n("common.time");
   const [timeLeft, setTimeLeft] = useState<Map<ETimeUnits, number>>(

@@ -3,6 +3,7 @@
 import { Icons, TIconKeys } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 import { useScopedI18n } from "@/locales/client";
+import { createElement } from "react";
 
 type TBenefitsKey = "info_1" | "info_2" | "info_3";
 
@@ -11,7 +12,20 @@ type TBenefit = {
   icon: TIconKeys;
 };
 
-export const About = () => {
+type TStat = {
+  amount: number;
+  unit?: string;
+};
+
+export interface IAboutProps {
+  stats: {
+    users: TStat;
+    games: TStat;
+  };
+  container?: Pick<React.HTMLAttributes<HTMLDivElement>, "className">;
+}
+
+export const About = ({ stats }: IAboutProps) => {
   const routesI18n = useScopedI18n("common.routes");
   const aboutI18n = useScopedI18n("pages.home.about");
   const gridWidth = 560;
@@ -24,11 +38,33 @@ export const About = () => {
     { key: "info_3", icon: "People" },
   ];
 
+  const renderStat = (
+    stat: TStat,
+    type: "users" | "games"
+  ): React.JSX.Element => {
+    const statsIndex: "info_1" | "info_2" =
+      type === "users" ? "info_1" : "info_2";
+    return (
+      <div className="font-bold flex flex-col gap-2">
+        <span className="text-heading leading-[97px]" aria-labelledby={type}>
+          {stat.amount}
+          {stat.unit && (
+            <sub className="text-large leading-[48px]]">{stat.unit}</sub>
+          )}
+          {"+"}
+        </span>
+        <span className="text-black leading-[30px] text-md">
+          {aboutI18n(`stats.${statsIndex}.description`)}
+        </span>
+      </div>
+    );
+  };
+
   return (
     <section
       className={cn(
         "grid grid-cols-1 sm:grid-cols-2  text-black w-full max-w-7xl mx-auto place-items-center",
-        `gap-[${gap}px]`
+        `gap-x-[${gap}px]`
       )}
     >
       <aside
@@ -37,25 +73,39 @@ export const About = () => {
           `sm:w-[${gridWidth}px]`
         )}
       >
-        <div className="flex flex-col gap-[40px]">
+        <div className="flex flex-col gap-40">
           <h1 className="w-full font-bolder justify-start leading-[60px] text-heading-md font-heading">
             {routesI18n("about")}
           </h1>
-          <p>{aboutI18n(`description`)}</p>
+          <p className="font-sans font-regular text-sm text-gray">
+            {aboutI18n(`description`)}
+          </p>
         </div>
-        <div className="flex flex-col gap-[40px]">
-          <div>600</div>
-          <div>125</div>
+        <div className="flex flex-col gap-40 text-blue-light">
+          {renderStat(stats.users, "users")}
+          {renderStat(stats.games, "games")}
         </div>
       </aside>
       <aside className={cn("w-full", `sm:w-[${gridWidth}px]`)}>
-        <ul className="flex flex-col font-sans gap-[40px] px-[75px] py-[113px] bg-[#EEEEEE]">
+        <ul className="flex flex-col font-sans gap-40 px-[75px] py-[113px] bg-[#EEEEEE]">
           {benefitsKey.map((value) => (
-            <li key={value.key}>
-              <h3 className="text-md font-bold">
-                {aboutI18n(`benefits.${value.key}.title`)}
-              </h3>
-              <p>{aboutI18n(`benefits.${value.key}.description`)}</p>
+            <li key={value.key} className="grid grid-cols-4">
+              <div className="col-span-1 text-center">
+                <div className="bg-white flex items-center justify-center w-[50px] h-[50px] rounded-full text-center">
+                  {createElement(Icons[value.icon], {
+                    width: 24,
+                    height: 24,
+                  })}
+                </div>
+              </div>
+              <div className="flex flex-col col-span-3">
+                <h3 className="text-md font-bold">
+                  {aboutI18n(`benefits.${value.key}.title`)}
+                </h3>
+                <p className="font-sans font-regular text-sm text-gray">
+                  {aboutI18n(`benefits.${value.key}.description`)}
+                </p>
+              </div>
             </li>
           ))}
         </ul>
