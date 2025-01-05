@@ -43,6 +43,20 @@ export default {
       "seconds#one": EN_SECOND,
       "seconds#other": EN_SECONDS,
     },
+    footer: {
+      copyRight: "{year} Copyright. Policy.",
+      address: {
+        title: "Address",
+        office_1: "Valletta Buildings, South Street, Valletta - VLT 1103 Malta, Mỹ",
+        office_2: "20 Phan Dang Luu street, Hai Chau District, Danang city, Vietnam",
+        phone: "(+1) 555-0108-000 or (+236) 555-0108"
+      },
+      subscribe: {
+        title: "Subscribe",
+        description: "Subscribe to our newsletter and be the first to know about our updates",
+        placeholder: "Enter your email"
+      }
+    },
   },
   pages: {
     home: {

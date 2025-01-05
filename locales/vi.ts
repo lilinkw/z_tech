@@ -37,6 +37,20 @@ export default {
       "seconds#one": VI_SECOND,
       "seconds#other": VI_SECOND,
     },
+    footer: {
+      copyRight: "{year} Copyright. Policy.",
+      address: {
+        title: "Địa chỉ",
+        office_1: "Valletta Buildings, South Street, Valletta - VLT 1103 Malta, Mỹ",
+        office_2: "Số 20 đường Phan Đăng Lưu, quận Hải Châu, thành phố Đà Nẵng, Việt Nam",
+        phone: "(+1) 555-0108-000 hoặc (+236) 555-0108"
+      },
+      subscribe: {
+        title: "Theo dõi",
+        description: "Đăng ký nhận bản tin của chúng tôi và là người đầu tiên biết về các cập nhật của chúng tôi",
+        placeholder: "Email"
+      }
+    },
   },
   pages: {
     home: {
@@ -87,8 +101,8 @@ export default {
           "Là nhà tiên phong trong lĩnh vực trò chơi ứng dụng dành cho thiết bị di động, chúng tôi tự hào về tính độc đáo và cá tính, cung cấp cho người chơi toàn cầu những trò chơi hiện đại có cốt truyện tuyệt vời, hiệu ứng âm thanh giật gân và hoạt ảnh hoành tráng không ngừng gây ấn tượng.",
       },
       partners: {
-        title: "Đối tác"
-      }
+        title: "Đối tác",
+      },
     },
   },
 } as const;

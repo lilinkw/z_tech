@@ -1,4 +1,7 @@
 import {
+  IconBrandFacebookFilled,
+  IconBrandLinkedinFilled,
+  IconBrandTwitterFilled,
   IconCalendarCheck,
   IconCaretDownFilled,
   IconCaretUpFilled,
@@ -21,6 +24,9 @@ export const Icons = {
   ChevronLeft: IconChevronLeft,
   ChevronRight: IconChevronRight,
   ChevronUp: IconChevronUp,
+  TwitterFilled: IconBrandTwitterFilled,
+  FacebookFilled: IconBrandFacebookFilled,
+  LinkedInFilled: IconBrandLinkedinFilled,
 };
 type TIconKeys = keyof typeof Icons;
 

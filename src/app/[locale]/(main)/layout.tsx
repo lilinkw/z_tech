@@ -1,3 +1,4 @@
+import { Footer } from "@/components";
 import Header from "@/components/Header";
 import { I18nProviderClient } from "@/locales/client";
 import type { ReactNode } from "react";
@@ -17,6 +18,7 @@ export default async function Layout({
           containers={{ className: "absolute top-0 z-50 w-full text-white" }}
         />
         {children}
+        <Footer />
       </main>
     </I18nProviderClient>
   );
