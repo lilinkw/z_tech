@@ -18,7 +18,7 @@ const enum ETimeUnits {
   // * only used for rendering
   Colon = ":",
 }
-
+const ELLIPSE_BG = "[clip-path:ellipse(50%_50%_at_50%_50%)]";
 const Countdown = ({ endTime, container }: ICountdownProps) => {
   const heroI18n = useScopedI18n("pages.home.hero");
   const timeI18n = useScopedI18n("common.time");
@@ -74,45 +74,53 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
       }
     });
     return (
-      <div className="flex flex-col items-center w-full gap-[97px]">
-        <div className="w-full bg-white text-black flex gap-[4px] sm:gap-8 text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
-          {keysWithColons.map((key, index) => {
-            if (key === ETimeUnits.Colon) {
+      <div className="relative">
+        <div className={"relative z-10 flex flex-col items-center w-full gap-[97px]"}>
+          <div className="w-full bg-white text-black flex gap-[4px] sm:gap-8 text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
+            {keysWithColons.map((key, index) => {
+              if (key === ETimeUnits.Colon) {
+                return (
+                  <div
+                    key={`${key}-${index}`}
+                    className="flex flex-col items-center justify-center"
+                  >
+                    <span className="font-sans font-bold font-[size:65px]">
+                      {":"}
+                    </span>
+                  </div>
+                );
+              }
+              const timeValue = Number(timeLeft.get(key));
+              const text = timeI18n(key, { count: timeValue });
               return (
                 <div
-                  key={`${key}-${index}`}
-                  className="flex flex-col items-center justify-center"
+                  key={key}
+                  className="flex flex-col items-center min-w-0 sm:min-w-[60px]"
                 >
-                  <span className="font-sans font-bold font-[size:65px]">
-                    {":"}
-                  </span>
+                  {renderTimeSlot(timeValue, text)}
                 </div>
               );
-            }
-            const timeValue = Number(timeLeft.get(key));
-            const text = timeI18n(key, { count: timeValue });
-            return (
-              <div
-                key={key}
-                className="flex flex-col items-center min-w-0 sm:min-w-[60px]"
-              >
-                {renderTimeSlot(timeValue, text)}
-              </div>
-            );
-          })}
+            })}
+          </div>
+          <div className="w-[75%] flex flex-col gap-[32px] font-sans font-regular">
+            <p className="text-white text-center text-[18px] ">
+              {heroI18n("newsletter.description")}
+            </p>
+            <EmailForm
+              emailInputProps={{
+                placeholder: heroI18n("newsletter.placeholder"),
+                color: "filled",
+                className: "text-sm py-5",
+              }}
+            />
+          </div>
         </div>
-        <div className="w-[75%] flex flex-col gap-[32px] font-sans font-regular">
-          <p className="text-white text-center text-[18px] ">
-            {heroI18n("newsletter.description")}
-          </p>
-          <EmailForm
-            emailInputProps={{
-              placeholder: heroI18n("newsletter.placeholder"),
-              color: "filled",
-              className: "text-sm py-5"
-            }}
-          />
-        </div>
+        <div
+          className={cn(
+            "relative bottom-[350px] h-full w-full backdrop-blur-md bg-white/10",
+            ELLIPSE_BG
+          )}
+        ></div>
       </div>
     );
   }, [heroI18n, timeI18n, timeLeft]);
