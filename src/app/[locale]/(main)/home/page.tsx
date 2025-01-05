@@ -41,7 +41,8 @@ export default async function Home() {
       <Countdown
         endTime={PUBLISH_TIME}
         container={{
-          className: "absolute top-[30%] w-full flex justify-center",
+          className:
+            "absolute top-[30%] w-full flex justify-center px-xs sm:px-0",
         }}
       />
     </section>
@@ -55,7 +56,10 @@ export default async function Home() {
       <br className="mb-[128px]" />
       <Games games={gamesJson} />
       <br className="mb-[128px]" />
-      <Partners partners={partnersJson} />
+      <Partners
+        partners={partnersJson}
+        container={{ className: "overflow-hidden" }}
+      />
     </div>
   );
 }

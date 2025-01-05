@@ -73,7 +73,7 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
       }
     });
     return (
-      <div className="flex gap-8 bg-white text-black text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
+      <div className="flex gap-[4px] sm:gap-8 bg-white text-black text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
         {keysWithColons.map((key, index) => {
           if (key === ETimeUnits.Colon) {
             return (
@@ -90,7 +90,10 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
           const timeValue = Number(timeLeft.get(key));
           const text = timeI18n(key, { count: timeValue });
           return (
-            <div key={key} className="flex flex-col items-center min-w-[60px]">
+            <div
+              key={key}
+              className="flex flex-col items-center min-w-0 sm:min-w-[60px]"
+            >
               {renderTimeSlot(timeValue, text)}
             </div>
           );
@@ -101,8 +104,8 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
 
   return (
     <div className={cn(container?.className)}>
-      <div className="flex flex-col items-center">
-        <h1 className="font-heading font-bolder text-heading text-white">
+      <div className="flex flex-col items-center gap-[38px] md:gap-0">
+        <h1 className="font-heading font-bolder text-large sm:text-heading text-white text-center leading-50 sm:leading-[120px] w-full">
           {heroI18n("title")}
         </h1>
         {renderCountDownTable()}

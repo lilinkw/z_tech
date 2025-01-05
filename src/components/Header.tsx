@@ -9,7 +9,10 @@ import { ERoute, ROUTES } from "@/routes";
 import { Dropdown, IDropDownOption } from "./ui/Dropdown";
 import { TLocale } from "@/middleware";
 import { cn } from "@/lib/utils";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { useIsScroll, useMediaQuery } from "@/hooks";
+import { Icons } from "./ui";
+import { EScreenSize } from "@/lib/screen";
 
 type TRouteHeader = { [K in Exclude<ERoute, ERoute.Home>]: string };
 
@@ -34,13 +37,18 @@ export default function Header(props: IHeaderProps) {
   const languageI18n = useScopedI18n("common.languages");
   const locale = useCurrentLocale();
   const changeLocale = useChangeLocale();
+  const mdWidth = useMediaQuery(`(min-width: ${EScreenSize.MD})`);
+  const { isScrolled } = useIsScroll();
 
-  const ROUTE_HEADER: TRouteHeader = {
-    [ERoute.About]: routesI18n("about"),
-    [ERoute.Contact]: routesI18n("contact"),
-    [ERoute.Games]: routesI18n("games"),
-    [ERoute.Partners]: routesI18n("partners"),
-  };
+  const ROUTE_HEADER: TRouteHeader = useMemo(
+    () => ({
+      [ERoute.About]: routesI18n("about"),
+      [ERoute.Contact]: routesI18n("contact"),
+      [ERoute.Games]: routesI18n("games"),
+      [ERoute.Partners]: routesI18n("partners"),
+    }),
+    [routesI18n]
+  );
 
   const onChangeLanguage = useCallback(
     (locale: TLocale) => {
@@ -90,21 +98,33 @@ export default function Header(props: IHeaderProps) {
       />
     );
   }, [languageI18n, locale, onChangeLanguage]);
-  const renderRoutes = () => (
-    <nav className="flex flex-row w-[710px] justify-between font-sans items-center">
-      {Object.entries(ROUTE_HEADER).map(([key, value]) => (
-        <li className="list-none" key={key}>
-          <a href={ROUTES[key as ERoute] ?? "/"}>{value}</a>
-        </li>
-      ))}
-      {renderChangeLocal()}
-    </nav>
+
+  const renderRoutes = useCallback(
+    () =>
+      mdWidth ? (
+        <nav className="flex flex-row w-[710px] justify-between font-sans items-center">
+          {Object.entries(ROUTE_HEADER).map(([key, value]) => (
+            <li className="list-none" key={key}>
+              <a href={ROUTES[key as ERoute] ?? "/"}>{value}</a>
+            </li>
+          ))}
+          {renderChangeLocal()}
+        </nav>
+      ) : (
+        <span className="pointer-events-auto">
+          <Icons.Menu width={40} height={40} />
+        </span>
+      ),
+    [ROUTE_HEADER, mdWidth, renderChangeLocal]
   );
 
   return (
     <header
       className={cn(
-        "flex flex-row justify-between px-12 py-8 items-center bg-transparent",
+        "flex flex-row justify-between px-xs sm:px-12 py-8 items-center bg-transparent",
+        isScrolled
+          ? "text-black backdrop-blur-md bg-white/20"
+          : "text-white bg-transparent",
         containers?.className
       )}
     >
@@ -112,8 +132,8 @@ export default function Header(props: IHeaderProps) {
         aria-hidden
         src="/white_logo.svg"
         alt="File icon"
-        width={108}
-        height={64}
+        width={mdWidth ? 108 : 68}
+        height={mdWidth ? 64 : 40}
       />
       {renderRoutes()}
     </header>

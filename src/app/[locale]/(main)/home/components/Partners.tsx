@@ -1,6 +1,7 @@
 "use client";
 
 import Carousel from "@/components/ui/Carousel";
+import { cn } from "@/lib/utils";
 import { useScopedI18n } from "@/locales/client";
 
 type TPartner = {
@@ -11,13 +12,19 @@ type TPartner = {
 
 interface IPartnersProps {
   partners: TPartner[];
+  container?: Pick<React.HTMLAttributes<HTMLElement>, "className">;
 }
 
-const Partners = ({ partners }: IPartnersProps) => {
+const Partners = ({ partners, container }: IPartnersProps) => {
   const partnersI18n = useScopedI18n("pages.home.partners");
   return (
-    <section className="bg-[#F6F6F6] flex flex-col items-center gap-16 py-[120px]">
-      <h1 className=" text-center gap-2 font-heading font-bolder text-heading">
+    <section
+      className={cn(
+        "bg-[#F6F6F6] flex flex-col items-center gap-16 py-[120px]",
+        container?.className
+      )}
+    >
+      <h1 className=" text-center gap-2  font-heading font-bolder text-large md:text-heading leading-50 md:leading-0">
         {partnersI18n("title")}
       </h1>
       <Carousel

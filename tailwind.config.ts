@@ -1,5 +1,14 @@
 import type { Config } from "tailwindcss";
 
+export enum EScreenSize {
+  XS = "375px",
+  SM = "640px",
+  MD = "768px",
+  LARGE = "1024px",
+  XL = "1280px",
+  XL_2 = "1536px",
+}
+
 export default {
   darkMode: "class",
   content: [
@@ -8,6 +17,14 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      xs: EScreenSize.XS, // Small devices (mobile)
+      sm: EScreenSize.SM, // Small devices (mobile)
+      md: EScreenSize.MD, // Medium devices (tablets)
+      lg: EScreenSize.LARGE, // Large devices (laptops/desktops)
+      xl: EScreenSize.XL, // Extra large devices
+      "2xl": EScreenSize.XL_2, // Double extra large devices
+    },
     extend: {
       colors: {
         background: "var(--background)",
@@ -25,18 +42,27 @@ export default {
         bolder: "900",
       },
       fontSize: {
+        xs: "12px",
         sm: "14px",
         md: "24px",
         large: "40px",
-        heading: "80px",
         "heading-md": "60px",
+        heading: "80px",
       },
       borderRadius: {
         md: "21px",
       },
       gap: {
-        40: "40px",
+        15: "15px",
+        20: "20px",
         24: "24px",
+        40: "40px",
+      },
+      padding: {
+        xs: "16px",
+      },
+      lineHeight: {
+        50: "50px",
       },
     },
   },

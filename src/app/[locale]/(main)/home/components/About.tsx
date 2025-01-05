@@ -46,11 +46,16 @@ export const About = ({ stats }: IAboutProps) => {
     const statsIndex: "info_1" | "info_2" =
       type === "users" ? "info_1" : "info_2";
     return (
-      <div className="font-bold flex flex-col gap-2">
-        <span className="text-heading leading-[97px]" aria-labelledby={type}>
+      <div className="font-bold flex flex-col gap-[4px] md:gap-2 w-1/2 md:w-[unset]">
+        <span
+          className="text-[44px] md:text-heading md:leading-[97px]"
+          aria-labelledby={type}
+        >
           {stat.amount}
           {stat.unit && (
-            <sub className="text-large leading-[48px]]">{stat.unit}</sub>
+            <sub className="text-[20px] md:text-large leading-[48px]]">
+              {stat.unit}
+            </sub>
           )}
           {"+"}
         </span>
@@ -64,19 +69,19 @@ export const About = ({ stats }: IAboutProps) => {
   const renderStatsGrid = (): React.JSX.Element => (
     <aside
       className={cn(
-        "w-full flex flex-col place-self-start gap-[80px]",
+        "w-full flex flex-col place-self-start gap-[80px] px-xs md:px-0",
         `sm:w-[${gridWidth}px]`
       )}
     >
-      <div className="flex flex-col gap-40">
-        <h1 className="w-full font-bolder justify-start leading-[60px] text-heading-md font-heading">
+      <div className="flex flex-col gap-[16px] md:gap-40">
+        <h1 className="w-full font-bolder justify-start leading-[60px] text-large md:text-heading-md font-heading">
           {routesI18n("about")}
         </h1>
         <p className="font-sans font-regular text-sm text-gray">
           {aboutI18n(`description`)}
         </p>
       </div>
-      <div className="flex flex-col gap-40 text-blue-light">
+      <div className="flex w-full md:w-[unset] flex-row md:flex-col gap-[16px] md:gap-40 text-blue-light">
         {renderStat(stats.users, "users")}
         {renderStat(stats.games, "games")}
       </div>
@@ -85,7 +90,7 @@ export const About = ({ stats }: IAboutProps) => {
 
   const renderBenefitGrid = (): React.JSX.Element => (
     <aside className={cn("w-full", `sm:w-[${gridWidth}px]`)}>
-      <ul className="flex flex-col font-sans gap-40 px-[75px] py-[113px] bg-[#EEEEEE]">
+      <ul className="flex flex-col font-sans gap-[40px] md:gap-40 px-xs py-[40px] md:px-[75px] md:py-[113px] bg-[#EEEEEE]">
         {benefitsKey.map((value) => (
           <li key={value.key} className="grid grid-cols-4">
             <div className="col-span-1 text-center">
@@ -118,7 +123,7 @@ export const About = ({ stats }: IAboutProps) => {
             <Image src="/wizard.svg" alt="Wizard" width={437} height={533} />
           </div>
 
-          <div className="relative bottom-[100px]">
+          <div className="relative bottom-[32px] md:bottom-[100px]">
             <Image src="/pin-map.svg" alt="Pin Map" width={1160} height={420} />
           </div>
         </div>

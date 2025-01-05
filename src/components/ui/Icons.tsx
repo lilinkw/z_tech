@@ -9,6 +9,7 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconChevronUp,
+  IconMenu2,
   IconProps,
   IconToolsOff,
   IconUsers,
@@ -27,6 +28,7 @@ export const Icons = {
   TwitterFilled: IconBrandTwitterFilled,
   FacebookFilled: IconBrandFacebookFilled,
   LinkedInFilled: IconBrandLinkedinFilled,
+  Menu: IconMenu2,
 };
 type TIconKeys = keyof typeof Icons;
 
