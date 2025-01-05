@@ -1,95 +1,132 @@
+import { chunkArray } from "@/lib/helper";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { Icons } from "./Icons";
+
+type TCarouselItem = {
+  id: number;
+  title: string;
+  description?: string;
+  imageUrl: string;
+};
 
 interface ICarouselProps {
-  items: Array<{
-    id: number;
-    title: string;
-    description?: string;
-    imageUrl: string;
-  }>;
+  items: Array<TCarouselItem>;
+  //   itemWidth: number | `${number}`;
   maxItemsDisplayed?: number;
+  container?: Pick<React.HTMLAttributes<HTMLDivElement>, "className">;
+  slides?: Pick<React.HTMLAttributes<HTMLDivElement>, "className"> & {
+    maxWidth: number | `${number}`;
+  };
 }
 
-const Carousel = ({ items, maxItemsDisplayed }: ICarouselProps) => {
+const Carousel = ({
+  items,
+  maxItemsDisplayed,
+  container,
+  slides,
+}: //   itemWidth,
+ICarouselProps) => {
   const maxItems = maxItemsDisplayed ?? items.length;
-  const [startIndex, setStartIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const slidesRef = useRef<HTMLDivElement>(null);
+  const [slidePageNumber, setSlidePageNumber] = useState(0);
 
-  const totalSlides = Math.ceil(items.length / maxItems);
+  const slidePages = useMemo(
+    () => chunkArray(items, maxItems),
+    [items, maxItems]
+  );
+  const canGoNext = useMemo(
+    () => slidePageNumber < slidePages.length - 1,
+    [slidePageNumber, slidePages.length]
+  );
+  const canGoBack = useMemo(
+    () => slidePages.length > 0 && slidePageNumber > 0,
+    [slidePageNumber, slidePages.length]
+  );
 
   const handleNext = () => {
-    setStartIndex((startIndex + maxItems) % items.length);
+    debugger;
+    if (canGoNext) {
+      setSlidePageNumber((prev) => {
+        debugger;
+        return prev + 1;
+      });
+    }
   };
 
   const handleBack = () => {
-    setStartIndex((startIndex - maxItems + items.length) % items.length);
-  };
+    debugger;
 
-  const renderItem = (item: ICarouselProps["items"][number]) => {
-    return (
-      <div
-        key={item.id}
-        className="flex flex-col gap-2 flex-shrink-0 w-full"
-        style={{ width: `${100 / totalSlides}%` }}
-      >
-        <Image
-          className="rounded-[10px]"
-          src={item.imageUrl}
-          alt={item.title}
-          width={260}
-          height={100}
-        />
-      </div>
-    );
-  };
-
-  const slides = useMemo(() => {
-    const slideArrays = [];
-    for (let i = 0; i < items.length; i += maxItems) {
-      const slideItems = [];
-      for (let j = 0; j < maxItems; j++) {
-        const itemIndex = (i + j) % items.length; // Calculate the wrapped index
-        slideItems.push(items[itemIndex]);
-      }
-      slideArrays.push(slideItems);
+    if (canGoBack) {
+      setSlidePageNumber((prev) => prev - 1);
     }
-    return slideArrays;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items.length, maxItems]);
+  };
 
-  const activeSlideIndex = Math.floor(startIndex / maxItems);
-
-  return (
-    <div className="w-full relative" ref={containerRef}>
-      <div className="flex overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
+  const renderItem = useCallback(
+    (item: TCarouselItem, index: number) => {
+      const gap = 2;
+      return (
+        <li
+          key={`${item.id}-${index}`}
+          className={cn("flex flex-col gap-2 items-center justify-center")}
           style={{
-            transform: `translateX(-${activeSlideIndex * 100}%)`,
-            width: `fit-content`,
+            minWidth: `${
+              (slides ? +slides?.maxWidth / maxItems : 260) - maxItems * 2
+            }px`,
+            height: "100px",
+            gap: `${gap}px`,
           }}
         >
-          {/* Render each slide with wrapped items */}
-          {slides.map((slideItems, slideIndex) => (
-            <div key={slideIndex} className="flex">
-              {slideItems.map((item) => renderItem(item))}
-            </div>
-          ))}
-        </div>
+          <Image
+            className="rounded-[10px]"
+            src={item.imageUrl}
+            alt={item.title}
+            width={100}
+            height={100}
+          />
+        </li>
+      );
+    },
+    [slides, maxItems]
+  );
+
+  return (
+    <div
+      id="carousel-container-component"
+      className={cn("flex items-center", container?.className)}
+    >
+      <button
+        className="bg-white rounded-[10px] h-fit hover:bg-gray-300 px-2 py-2"
+        style={{
+          color: canGoBack ? "black" : "gray",
+          pointerEvents: canGoBack ? "auto" : "none",
+        }}
+        onClick={handleBack}
+      >
+        <Icons.ChevronLeft />
+      </button>
+      <div
+        ref={slidesRef}
+        className={cn("overflow-hidden", slides?.className)}
+        style={{ width: slides?.maxWidth }}
+      >
+        <ul className="flex items-center gap-4">
+          {slidePages[slidePageNumber].map((item, index) =>
+            renderItem(item, index)
+          )}
+        </ul>
       </div>
 
       <button
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 px-3 py-2 rounded-full"
-        onClick={handleBack}
-      >
-        {"<"}
-      </button>
-      <button
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 px-3 py-2 rounded-full"
+        className="bg-white rounded-[10px] h-fit hover:bg-gray-300 px-2 py-2"
+        style={{
+          color: canGoNext ? "black" : "gray",
+          pointerEvents: canGoNext ? "auto" : "none",
+        }}
         onClick={handleNext}
       >
-        {">"}
+        <Icons.ChevronRight />
       </button>
     </div>
   );

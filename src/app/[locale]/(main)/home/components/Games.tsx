@@ -11,7 +11,7 @@ interface IGame {
 }
 
 interface IGameCardProps {
-  games?: IGame[];
+  games: IGame[];
 }
 
 const Games = ({ games }: IGameCardProps) => {

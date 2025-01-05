@@ -10,7 +10,7 @@ export async function generateStaticParams() {
   }));
 }
 
-const ErrorPageComp = lazy(() => import("@/components/ui/error-components"));
+const ErrorPageComp = lazy(() => import("@/components/error-components"));
 
 interface IErrorPageProps {
   params: {

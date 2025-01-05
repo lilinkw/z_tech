@@ -1,11 +1,14 @@
 import Image from "next/image";
+
 import { Background } from "./components/Background";
 import Countdown from "./components/Countdown";
 import { About } from "./components/About";
 import Games from "./components/Games";
-import React from "react";
+import Partners from "./components/Partners";
+
 // import dynamic from "next/dynamic";
 import gamesJson from "@/data/prominent_games.json";
+import partnersJson from "@/data/partners.json";
 
 // type Props = {
 //   params: Promise<{ id: string }>;
@@ -35,7 +38,7 @@ const STATS: React.ComponentProps<typeof About>["stats"] = {
 };
 export default async function Home() {
   const renderFooter = () => (
-    <footer className="bg-[#F6F6F6] text-black">
+    <footer className=" text-black">
       <a
         className="flex items-center gap-2 hover:underline hover:underline-offset-4"
         href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -104,6 +107,7 @@ export default async function Home() {
       <br className="mb-[128px]" />
       <Games games={gamesJson} />
       <br className="mb-[128px]" />
+      <Partners partners={partnersJson} />
       {renderFooter()}
     </div>
   );

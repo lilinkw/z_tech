@@ -3,6 +3,9 @@ import {
   IconCaretDownFilled,
   IconCaretUpFilled,
   IconCheck,
+  IconChevronLeft,
+  IconChevronRight,
+  IconChevronUp,
   IconProps,
   IconToolsOff,
   IconUsers,
@@ -15,6 +18,9 @@ export const Icons = {
   CalenderTick: IconCalendarCheck,
   PenTool: IconToolsOff,
   People: IconUsers,
+  ChevronLeft: IconChevronLeft,
+  ChevronRight: IconChevronRight,
+  ChevronUp: IconChevronUp,
 };
 type TIconKeys = keyof typeof Icons;
 

@@ -19,6 +19,7 @@ const eslintConfig = [
         { argsIgnorePattern: "^_" },
       ], // Warn for unused variables
       "@typescript-eslint/no-explicit-any": "warn", 
+      "@typescript-eslint/no-empty-object-type": "warn", 
       "no-unused-vars": "off", // Disable the base rule (we're using @typescript-eslint instead)
       "unused-imports/no-unused-imports": "warn",
       "react-hooks/rules-of-hooks": "error",

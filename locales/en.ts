@@ -92,6 +92,9 @@ export default {
         description:
           "As a pioneer of mobile app gamification, we take pride in originality and individuality, providing global players with state-of-the-art games that feature splendid storylines, sensational sound effects and magnificent animation that never cease to impress.",
       },
+      partners: {
+        title: "Our partners",
+      },
     },
   },
 } as const;
