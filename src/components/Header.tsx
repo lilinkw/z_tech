@@ -9,7 +9,7 @@ import { ERoute, ROUTES } from "@/routes";
 import { Dropdown, IDropDownOption } from "./ui/Dropdown";
 import { TLocale } from "@/middleware";
 import { cn } from "@/lib/utils";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useIsScroll, useMediaQuery } from "@/hooks";
 import { Icons } from "./ui";
 import { EScreenSize } from "@/lib/screen";
@@ -39,13 +39,14 @@ export default function Header(props: IHeaderProps) {
   const changeLocale = useChangeLocale();
   const mdWidth = useMediaQuery(`(min-width: ${EScreenSize.MD})`);
   const { isScrolled } = useIsScroll();
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const ROUTE_HEADER: TRouteHeader = useMemo(
     () => ({
       [ERoute.About]: routesI18n("about"),
-      [ERoute.Contact]: routesI18n("contact"),
       [ERoute.Games]: routesI18n("games"),
       [ERoute.Partners]: routesI18n("partners"),
+      [ERoute.Contact]: routesI18n("contact"),
     }),
     [routesI18n]
   );
@@ -111,31 +112,72 @@ export default function Header(props: IHeaderProps) {
           {renderChangeLocal()}
         </nav>
       ) : (
-        <span className="pointer-events-auto">
+        <span
+          className="pointer-events-auto"
+          onClick={() => {
+            setIsMenuOpen(true);
+          }}
+        >
           <Icons.Menu width={40} height={40} />
         </span>
       ),
     [ROUTE_HEADER, mdWidth, renderChangeLocal]
   );
 
+  const renderMenu = useCallback((): React.JSX.Element => {
+    const shouldRender = isMenuOpen && !mdWidth;
+    const routeObjectArray = Object.entries(ROUTE_HEADER);
+    return shouldRender ? (
+      <div className="fixed top-0 w-screen h-full bg-white text-black flex flex-col items-center gap-4 py-4 font-heading font-bolder text-heading-md">
+        <div className="flex flex-row justify-between items-center w-full px-4 pb-[40px]">
+          {renderChangeLocal()}
+          <span
+            className="pointer-events-auto"
+            onClick={() => {
+              setIsMenuOpen(false);
+            }}
+          >
+            <Icons.X width={40} height={40} />
+          </span>
+        </div>
+        <ul className="w-full px-xs font-sans font-bold text-sm leading-[17.5px] text-center divide-y divide-solid">
+          {routeObjectArray.map(([key, value]) => (
+            <li className="list-none py-[40px] border-[#EEEEEE]" key={key}>
+              <a href={ROUTES[key as ERoute] ?? "/"}>{value}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <></>
+    );
+  }, [isMenuOpen, mdWidth, ROUTE_HEADER, renderChangeLocal]);
+
   return (
     <header
       className={cn(
-        "flex flex-row justify-between px-xs sm:px-12 py-8 items-center bg-transparent",
-        isScrolled
-          ? "text-black backdrop-blur-md bg-white/20"
-          : "text-white bg-transparent",
-        containers?.className
+        containers?.className,
+        isMenuOpen && !mdWidth && "relative"
       )}
     >
-      <Image
-        aria-hidden
-        src="/white_logo.svg"
-        alt="File icon"
-        width={mdWidth ? 108 : 68}
-        height={mdWidth ? 64 : 40}
-      />
-      {renderRoutes()}
+      <div
+        className={cn(
+          "flex flex-row justify-between px-xs sm:px-12 py-8 items-center bg-transparent",
+          isScrolled
+            ? "text-black backdrop-blur-md bg-white/20"
+            : "text-white bg-transparent"
+        )}
+      >
+        <Image
+          aria-hidden
+          src="/white_logo.svg"
+          alt="File icon"
+          width={mdWidth ? 108 : 68}
+          height={mdWidth ? 64 : 40}
+        />
+        {renderRoutes()}
+      </div>
+      {renderMenu()}
     </header>
   );
 }

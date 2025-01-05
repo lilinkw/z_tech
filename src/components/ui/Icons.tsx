@@ -16,6 +16,7 @@ import {
   IconProps,
   IconToolsOff,
   IconUsers,
+  IconX,
 } from "@tabler/icons-react";
 
 export const Icons = {
@@ -35,6 +36,7 @@ export const Icons = {
   Menu: IconMenu2,
   MapPin: IconMapPinFilled,
   PhoneFilled: IconDeviceMobileFilled,
+  X: IconX,
 };
 type TIconKeys = keyof typeof Icons;
 
