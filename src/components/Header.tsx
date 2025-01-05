@@ -42,9 +42,12 @@ export default function Header(props: IHeaderProps) {
     [ERoute.Partners]: routesI18n("partners"),
   };
 
-  const onChangeLanguage = (locale: TLocale) => {
-    changeLocale(locale);
-  };
+  const onChangeLanguage = useCallback(
+    (locale: TLocale) => {
+      changeLocale(locale);
+    },
+    [changeLocale]
+  );
 
   const renderChangeLocal = useCallback(() => {
     const LanguageOptions: Array<IDropDownOption<TLocale>> =
@@ -86,7 +89,7 @@ export default function Header(props: IHeaderProps) {
         onRenderSelectedOption={onRenderSelectedOption}
       />
     );
-  }, [locale]);
+  }, [languageI18n, locale, onChangeLanguage]);
   const renderRoutes = () => (
     <nav className="flex flex-row w-[710px] justify-between font-sans items-center">
       {Object.entries(ROUTE_HEADER).map(([key, value]) => (
