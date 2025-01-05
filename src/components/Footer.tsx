@@ -8,9 +8,9 @@ export const Footer = () => {
   const footerI18n = useScopedI18n("common.footer");
   return (
     <footer className="font-sans">
-      <div className="bg-[url('/bg-footer.svg')] bg-cover bg-no-repeat bg-center grid grid-cols-4 text-white xl:px-[100px] 2xl:px-[230px] pt-[104px] pb-[100px] gap-x-40">
-        <div className="col-span-2">
-          <div className="ml-[40px] flex flex-col gap-40">
+      <div className="bg-[url('/bg-footer.svg')] bg-cover bg-no-repeat bg-center grid grid-cols-1 md:grid-cols-4 text-white px-xs xl:px-[100px] 2xl:px-[230px] pt-[40px] md:pt-[104px] pb-[50px] md:pb-[100px] gap-x-40 gap-y-70">
+        <div className="flex justify-center md:justify-[unset] col-span-1 md:col-span-2">
+          <div className="md:ml-[40px] flex flex-col gap-40">
             <Image
               aria-hidden
               src="/white_logo.svg"

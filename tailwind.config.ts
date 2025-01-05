@@ -59,6 +59,7 @@ export default {
         20: "20px",
         24: "24px",
         40: "40px",
+        70: "70px",
       },
       padding: {
         xs: "16px",
