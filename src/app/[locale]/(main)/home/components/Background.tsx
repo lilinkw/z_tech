@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 
 const ELLIPSE_BG = "[clip-path:ellipse(1296px_725px_at_50%_20%)]";

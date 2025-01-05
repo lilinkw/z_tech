@@ -2,6 +2,10 @@ import Image from "next/image";
 import { Background } from "./components/Background";
 import Countdown from "./components/Countdown";
 import { About } from "./components/About";
+import Games from "./components/Games";
+import React from "react";
+// import dynamic from "next/dynamic";
+import gamesJson from "@/app/data/prominent_games.json";
 
 // type Props = {
 //   params: Promise<{ id: string }>;
@@ -29,7 +33,6 @@ const STATS: React.ComponentProps<typeof About>["stats"] = {
   },
   games: { amount: 135 },
 };
-
 export default async function Home() {
   const renderFooter = () => (
     <footer className="bg-[#F6F6F6] text-black">
@@ -98,6 +101,8 @@ export default async function Home() {
       {renderHero()}
       <br className="mb-[128px]" />
       <About stats={STATS} />
+      <br className="mb-[128px]" />
+      <Games games={gamesJson}/>
       {renderFooter()}
     </div>
   );

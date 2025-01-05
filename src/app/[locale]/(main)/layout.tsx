@@ -13,7 +13,9 @@ export default async function Layout({
   return (
     <I18nProviderClient locale={locale}>
       <main className="min-h-screen gap-16">
-        <Header containers={{ className: "absolute top-0 z-50 w-full" }} />
+        <Header
+          containers={{ className: "absolute top-0 z-50 w-full text-white" }}
+        />
         {children}
       </main>
     </I18nProviderClient>

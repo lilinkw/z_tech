@@ -81,6 +81,11 @@ export default {
           },
         },
       },
+      games: {
+        title: "Trò chơi",
+        description:
+          "Là nhà tiên phong trong lĩnh vực trò chơi ứng dụng dành cho thiết bị di động, chúng tôi tự hào về tính độc đáo và cá tính, cung cấp cho người chơi toàn cầu những trò chơi hiện đại có cốt truyện tuyệt vời, hiệu ứng âm thanh giật gân và hoạt ảnh hoành tráng không ngừng gây ấn tượng.",
+      },
     },
   },
 } as const;
