@@ -50,6 +50,8 @@ export default {
         heading: "80px",
       },
       borderRadius: {
+        xs: "5px",
+        sm: "10px",
         md: "21px",
       },
       gap: {
@@ -62,6 +64,7 @@ export default {
         xs: "16px",
       },
       lineHeight: {
+        30: "30px",
         50: "50px",
       },
     },

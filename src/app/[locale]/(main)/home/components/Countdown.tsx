@@ -1,5 +1,6 @@
 "use client";
 
+import { EmailForm } from "@/components";
 import { cn } from "@/lib/utils";
 import { useScopedI18n } from "@/locales/client";
 import React, { useCallback, useEffect, useState } from "react";
@@ -73,38 +74,52 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
       }
     });
     return (
-      <div className="flex gap-[4px] sm:gap-8 bg-white text-black text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
-        {keysWithColons.map((key, index) => {
-          if (key === ETimeUnits.Colon) {
+      <div className="flex flex-col items-center w-full gap-[97px]">
+        <div className="w-full bg-white text-black flex gap-[4px] sm:gap-8 text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
+          {keysWithColons.map((key, index) => {
+            if (key === ETimeUnits.Colon) {
+              return (
+                <div
+                  key={`${key}-${index}`}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <span className="font-sans font-bold font-[size:65px]">
+                    {":"}
+                  </span>
+                </div>
+              );
+            }
+            const timeValue = Number(timeLeft.get(key));
+            const text = timeI18n(key, { count: timeValue });
             return (
               <div
-                key={`${key}-${index}`}
-                className="flex flex-col items-center justify-center"
+                key={key}
+                className="flex flex-col items-center min-w-0 sm:min-w-[60px]"
               >
-                <span className="font-sans font-bold font-[size:65px]">
-                  {":"}
-                </span>
+                {renderTimeSlot(timeValue, text)}
               </div>
             );
-          }
-          const timeValue = Number(timeLeft.get(key));
-          const text = timeI18n(key, { count: timeValue });
-          return (
-            <div
-              key={key}
-              className="flex flex-col items-center min-w-0 sm:min-w-[60px]"
-            >
-              {renderTimeSlot(timeValue, text)}
-            </div>
-          );
-        })}
+          })}
+        </div>
+        <div className="w-[75%] flex flex-col gap-[32px] font-sans font-regular">
+          <p className="text-white text-center text-[18px] ">
+            {heroI18n("newsletter.description")}
+          </p>
+          <EmailForm
+            emailInputProps={{
+              placeholder: heroI18n("newsletter.placeholder"),
+              color: "filled",
+              className: "text-sm py-5"
+            }}
+          />
+        </div>
       </div>
     );
-  }, [timeI18n, timeLeft]);
+  }, [heroI18n, timeI18n, timeLeft]);
 
   return (
     <div className={cn(container?.className)}>
-      <div className="flex flex-col items-center gap-[38px] md:gap-0">
+      <div className="flex flex-col items-center gap-[38px] md:gap-0 w-[685px]">
         <h1 className="font-heading font-bolder text-large sm:text-heading text-white text-center leading-50 sm:leading-[120px] w-full">
           {heroI18n("title")}
         </h1>

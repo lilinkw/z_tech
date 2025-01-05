@@ -1,4 +1,5 @@
 import {
+  IconArrowRight,
   IconBrandFacebookFilled,
   IconBrandLinkedinFilled,
   IconBrandTwitterFilled,
@@ -9,6 +10,8 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconChevronUp,
+  IconDeviceMobileFilled,
+  IconMapPinFilled,
   IconMenu2,
   IconProps,
   IconToolsOff,
@@ -25,10 +28,13 @@ export const Icons = {
   ChevronLeft: IconChevronLeft,
   ChevronRight: IconChevronRight,
   ChevronUp: IconChevronUp,
+  ArrowRight: IconArrowRight,
   TwitterFilled: IconBrandTwitterFilled,
   FacebookFilled: IconBrandFacebookFilled,
   LinkedInFilled: IconBrandLinkedinFilled,
   Menu: IconMenu2,
+  MapPin: IconMapPinFilled,
+  PhoneFilled: IconDeviceMobileFilled,
 };
 type TIconKeys = keyof typeof Icons;
 
