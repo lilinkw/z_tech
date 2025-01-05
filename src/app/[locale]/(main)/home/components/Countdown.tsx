@@ -98,7 +98,7 @@ const Countdown = ({ endTime = defaultTime, container }: ICountdownProps) => {
         })}
       </div>
     );
-  }, [timeLeft]);
+  }, [timeI18n, timeLeft]);
 
   return (
     <div className={cn(container?.className)}>

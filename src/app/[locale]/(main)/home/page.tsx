@@ -3,9 +3,9 @@ import { Background } from "./components/Background";
 import Countdown from "./components/Countdown";
 import { About } from "./components/About";
 
-type Props = {
-  params: Promise<{ id: string }>;
-};
+// type Props = {
+//   params: Promise<{ id: string }>;
+// };
 
 // export async function generateMetadata(
 //   { params }: Props,
@@ -20,7 +20,7 @@ type Props = {
 //   };
 // }
 
-export default async function Home(props: Props) {
+export default async function Home() {
   const renderFooter = () => (
     <footer className="bg-[#F6F6F6] text-black">
       <a

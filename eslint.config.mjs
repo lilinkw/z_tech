@@ -12,14 +12,16 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: ["next/core-web-vitals", "next/typescript"],
-    plugins: ["unused-imports"],
+    plugins: ["unused-imports", "react-hooks"],
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { argsIgnorePattern: "^_" },
       ], // Warn for unused variables
-      "no-unused-vars": "warn", // Disable the base rule (we're using @typescript-eslint instead)
+      "no-unused-vars": "off", // Disable the base rule (we're using @typescript-eslint instead)
       "unused-imports/no-unused-imports": "warn",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error",
     },
   }),
 ];
