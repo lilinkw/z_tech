@@ -18,7 +18,8 @@ const enum ETimeUnits {
   // * only used for rendering
   Colon = ":",
 }
-const ELLIPSE_BG = "[clip-path:ellipse(50%_50%_at_50%_50%)]";
+const ELLIPSE_BG_MD = "[clip-path:ellipse(50%_50%_at_50%_50%)]";
+const ELLIPSE_BG = "[clip-path:ellipse(56%_60%_at_50%_50%)]";
 const Countdown = ({ endTime, container }: ICountdownProps) => {
   const heroI18n = useScopedI18n("pages.home.hero");
   const timeI18n = useScopedI18n("common.time");
@@ -74,8 +75,8 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
       }
     });
     return (
-      <div className="relative">
-        <div className={"relative z-10 flex flex-col items-center w-full gap-[97px]"}>
+      <div className="relative w-full">
+        <div className={"relative z-10 flex flex-col items-center w-full gap-40 md:gap-[97px]"}>
           <div className="w-full bg-white text-black flex gap-[4px] sm:gap-8 text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
             {keysWithColons.map((key, index) => {
               if (key === ETimeUnits.Colon) {
@@ -102,7 +103,7 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
               );
             })}
           </div>
-          <div className="w-[75%] flex flex-col gap-[32px] font-sans font-regular">
+          <div className="w-full md:w-[75%] flex flex-col gap-[32px] font-sans font-regular">
             <p className="text-white text-center text-[18px] ">
               {heroI18n("newsletter.description")}
             </p>
@@ -117,8 +118,8 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
         </div>
         <div
           className={cn(
-            "relative bottom-[350px] h-full w-full backdrop-blur-md bg-white/10",
-            ELLIPSE_BG
+            "relative bottom-[290px] md:bottom-[350px] h-full w-full backdrop-blur-md bg-white/10",
+            `${ELLIPSE_BG} md:${ELLIPSE_BG_MD}`
           )}
         ></div>
       </div>
@@ -127,7 +128,7 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
 
   return (
     <div className={cn(container?.className)}>
-      <div className="flex flex-col items-center gap-[38px] md:gap-0 w-[685px]">
+      <div className="flex flex-col items-center gap-[38px] md:gap-0 w-full md:w-[685px]">
         <h1 className="font-heading font-bolder text-large sm:text-heading text-white text-center leading-50 sm:leading-[120px] w-full">
           {heroI18n("title")}
         </h1>

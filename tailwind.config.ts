@@ -4,7 +4,7 @@ export enum EScreenSize {
   XS = "375px",
   SM = "640px",
   MD = "768px",
-  LARGE = "1024px",
+  LG = "1024px",
   XL = "1280px",
   XL_2 = "1536px",
 }
@@ -21,7 +21,7 @@ export default {
       xs: EScreenSize.XS, // Small devices (mobile)
       sm: EScreenSize.SM, // Small devices (mobile)
       md: EScreenSize.MD, // Medium devices (tablets)
-      lg: EScreenSize.LARGE, // Large devices (laptops/desktops)
+      lg: EScreenSize.LG, // Large devices (laptops/desktops)
       xl: EScreenSize.XL, // Extra large devices
       "2xl": EScreenSize.XL_2, // Double extra large devices
     },

@@ -42,7 +42,7 @@ export default async function Home() {
         endTime={PUBLISH_TIME}
         container={{
           className:
-            "absolute top-[30%] w-full flex justify-center px-xs sm:px-0",
+            "absolute top-[20%] md:top-[30%] w-full flex justify-center px-xs sm:px-0",
         }}
       />
     </section>
