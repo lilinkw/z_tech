@@ -1,12 +1,9 @@
-import { Background } from "./components/Background";
-import Countdown from "./components/Countdown";
 import { About } from "./components/About";
-import Games from "./components/Games";
-import Partners from "./components/Partners";
 
 // import dynamic from "next/dynamic";
 import gamesJson from "@/data/prominent_games.json";
 import partnersJson from "@/data/partners.json";
+import { HomeClient } from "./components/HomeClient";
 
 // type Props = {
 //   params: Promise<{ id: string }>;
@@ -35,31 +32,14 @@ const STATS: React.ComponentProps<typeof About>["stats"] = {
   games: { amount: 135 },
 };
 export default async function Home() {
-  const renderHero = () => (
-    <section className="relative">
-      <Background />
-      <Countdown
-        endTime={PUBLISH_TIME}
-        container={{
-          className:
-            "absolute top-[20%] md:top-[30%] w-full flex justify-center px-xs sm:px-0",
-        }}
-      />
-    </section>
-  );
-
   return (
-    <div className="">
-      {renderHero()}
-      <br className="mb-[128px]" />
-      <About stats={STATS} />
-      <br className="mb-[128px]" />
-      <Games games={gamesJson} />
-      <br className="mb-[128px]" />
-      <Partners
-        partners={partnersJson}
-        container={{ className: "overflow-hidden" }}
-      />
-    </div>
+    <HomeClient
+      data={{
+        publishedTime: PUBLISH_TIME,
+        stats: STATS,
+        games: gamesJson,
+        partners: partnersJson,
+      }}
+    />
   );
 }

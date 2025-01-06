@@ -3,6 +3,7 @@
 import Carousel from "@/components/ui/Carousel";
 import { cn } from "@/lib/utils";
 import { useScopedI18n } from "@/locales/client";
+import { Ref } from "react";
 
 type TPartner = {
   id: number;
@@ -12,13 +13,16 @@ type TPartner = {
 
 interface IPartnersProps {
   partners: TPartner[];
-  container?: Pick<React.HTMLAttributes<HTMLElement>, "className">;
+  container?: Pick<React.HTMLAttributes<HTMLElement>, "className"> & {
+    ref?: Ref<HTMLElement>;
+  };
 }
 
 const Partners = ({ partners, container }: IPartnersProps) => {
   const partnersI18n = useScopedI18n("pages.home.partners");
   return (
     <section
+      ref={container?.ref}
       className={cn(
         "bg-[#F6F6F6] flex flex-col items-center gap-16 py-[120px]",
         container?.className
