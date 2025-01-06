@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { useScopedI18n } from "@/locales/client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { createElement } from "react";
+import { createElement, useEffect, useState } from "react";
 
 type TBenefitsKey = "info_1" | "info_2" | "info_3";
 
@@ -36,6 +36,16 @@ export const About = ({ stats }: IAboutProps) => {
   const gap = 40;
   const gridWidthWithGap = gridWidth * 2 + gap;
   const mdWidth = useMediaQuery(`(min-width: ${EScreenSize.MD})`);
+  const [isFlying, setIsFlying] = useState(true);
+
+  useEffect(() => {
+    // Trigger the float animation after the fly animation (e.g., 5s)
+    const timer = setTimeout(() => {
+      setIsFlying(false);
+    }, 5000); // Match the duration of the fly animation
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
 
   const benefitsKey: Array<TBenefit> = [
     { key: "info_1", icon: "CalenderTick" },
@@ -123,8 +133,10 @@ export const About = ({ stats }: IAboutProps) => {
     <aside className={cn("w-full sm:col-span-2 col-span-1")}>
       <div className={`sm:w-[${gridWidthWithGap}x]`}>
         <div className="relative w-full h-auto flex flex-col justify-center items-center">
-          <div className="z-10">
-            <motion.div
+          <div
+            className={cn("z-10 ", isFlying ? "animation-fly-right-to-left" : "animate-float")}
+          >
+            {/* <motion.div
               initial={{ x: "180%", scale: 0.5 }}
               whileInView={{ x: 0, scale: 1 }}
               // transition={{ duration: 0.8, type: "spring" }}
@@ -138,14 +150,14 @@ export const About = ({ stats }: IAboutProps) => {
                   ease: "easeInOut",
                 },
               }}
-            >
-              <Image
-                src="/wizard.svg"
-                alt="Wizard"
-                width={mdWidth ? 437 : 300}
-                height={mdWidth ? 533 : 243}
-              />
-            </motion.div>
+            > */}
+            <Image
+              src="/wizard.svg"
+              alt="Wizard"
+              width={mdWidth ? 437 : 300}
+              height={mdWidth ? 533 : 243}
+            />
+            {/* </motion.div> */}
           </div>
 
           <div className="relative bottom-[32px] md:bottom-[100px]">

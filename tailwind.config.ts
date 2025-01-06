@@ -68,6 +68,21 @@ export default {
         30: "30px",
         50: "50px",
       },
+      keyframes: {
+        fly: {
+          '0%': { transform: 'translateX(200%) scale(0.5)' },
+          '50%': { transform: 'translateX(0%) scale(1)' },
+          '100%': { transform: 'translateX(-200%) scale(0.5)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
+      animation: {
+        "fly-right-to-left": 'fly 5s ease-in infinite',
+        float: 'float 2s ease-in-out infinite',
+      },
     },
   },
   plugins: [
