@@ -1,6 +1,8 @@
 "use client";
 
 import { EmailForm } from "@/components";
+import { useMediaQuery } from "@/hooks";
+import { EScreenSize } from "@/lib/screen";
 import { cn } from "@/lib/utils";
 import { useScopedI18n } from "@/locales/client";
 import React, { useCallback, useEffect, useState } from "react";
@@ -31,6 +33,8 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
       [ETimeUnits.Seconds, 0],
     ])
   );
+  const lgScreen = useMediaQuery(`(min-width: ${EScreenSize.LG})`);
+
   useEffect(() => {
     const calculateTimeLeft = () => {
       const end = new Date(endTime).getTime();
@@ -76,7 +80,11 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
     });
     return (
       <div className="relative w-full">
-        <div className={"relative z-10 flex flex-col items-center w-full gap-40 md:gap-[97px]"}>
+        <div
+          className={
+            "relative z-10 flex flex-col items-center w-full gap-40 md:gap-[97px]"
+          }
+        >
           <div className="w-full bg-white text-black flex gap-[4px] sm:gap-8 text-2xl px-8 py-4 rounded-md font-heading font-bolder text-heading-md justify-evenly">
             {keysWithColons.map((key, index) => {
               if (key === ETimeUnits.Colon) {
@@ -119,12 +127,12 @@ const Countdown = ({ endTime, container }: ICountdownProps) => {
         <div
           className={cn(
             "relative bottom-[290px] md:bottom-[350px] h-full w-full backdrop-blur-md bg-white/10",
-            `${ELLIPSE_BG} md:${ELLIPSE_BG_MD}`
+            lgScreen ? `${ELLIPSE_BG_MD}` : `${ELLIPSE_BG}`
           )}
         ></div>
       </div>
     );
-  }, [heroI18n, timeI18n, timeLeft]);
+  }, [heroI18n, lgScreen, timeI18n, timeLeft]);
 
   return (
     <div className={cn(container?.className)}>

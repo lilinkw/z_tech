@@ -1,5 +1,42 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Introduction
+- Project to clone z-tech landing page by Linh (Adrian) Nguyen
+### Tech stack
+- `NextJs` 15
+- `Tailwindcss`
+- `typescript`
+- `vercel` to deploy
+### Deployed web page
+https://z-tech-gilt.vercel.app
+### Git hub link
+https://github.com/lilinkw/z_tech
+
+### What have been done
+- Using App routing from `NextJs` 15
+- Using `Next/Image` to loading image
+- Using `tailwindcss` to config and style `css`
+- Utilize `typescript` and `eslint` for better development experience
+- Utilize `next-international` for multiple languages
+- Utilize `class-variance-authority` for creating multiple component variants
+- Utilize `use client` to separate with server component
+- Responsive Style for multiple device using `tailwindcss`
+- Utilize `React hooks` as long as `custom hooks`
+- Utilize `Vercel` and `GitHub` for CICD
+### What have not been done
+- Utilize `meta data` for better SEO. Why? Have not find a way to work with new library `next-international`
+
+## Web page first look
+
+### Desktop
+
+[!desktop](z-tech-desktop.png)
+
+### Mobile
+
+[!mobile](z-tech-mobile.png)
+
+
 ## Getting Started
 
 First, run the development server:
