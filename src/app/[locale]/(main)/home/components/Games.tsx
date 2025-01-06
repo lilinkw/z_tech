@@ -17,7 +17,10 @@ interface IGameCardProps {
 const Games = ({ games }: IGameCardProps) => {
   const gameI18n = useScopedI18n("pages.home.games");
   const renderGameCard = (game: IGame): React.JSX.Element => (
-    <div key={game.id} className="col-span-1 relative even:top-[118px]">
+    <div
+      key={game.id}
+      className="col-span-1 relative even:top-[118px] font-sans hover:shadow-2xl hover:shadow-gray-900"
+    >
       <Image
         className="rounded-[10px]"
         src={game.imageUrl}
@@ -25,7 +28,7 @@ const Games = ({ games }: IGameCardProps) => {
         width={410}
         height={560}
       />
-      <div className="absolute bottom-[20px] text-white px-[8px] md:px-[32px]">
+      <div className="w-full absolute bottom-[20px] text-white px-[8px] md:px-[32px]">
         <h3 className="font-bold text-md md:text-[48px] md:leading-[60px]">
           {game.title}
         </h3>

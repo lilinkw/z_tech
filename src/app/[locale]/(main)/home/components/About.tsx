@@ -132,7 +132,7 @@ export const About = ({ stats }: IAboutProps) => {
               animate={{ y: [0, -20, 0] }}
               transition={{
                 y: {
-                  duration: 5,
+                  duration: 2,
                   repeat: Infinity,
                   repeatType: "reverse",
                   ease: "easeInOut",
