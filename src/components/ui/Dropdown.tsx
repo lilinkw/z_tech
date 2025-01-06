@@ -1,8 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Icons } from "./Icons";
+import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
+
+const dropDownButtonVariants = cva(
+  "flex items-center space-x-2 bg-white text-black px-3 py-2 rounded shadow-md focus:outline-none",
+  {
+    variants: {
+      color: {
+        filled: "bg-white text-[#545454]",
+      },
+      variant: {
+        default: "",
+        outline: "border",
+        ghost: "bg-transparent",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+type TDowndownButtonVariants = VariantProps<typeof dropDownButtonVariants>;
 
 export interface IDropDownOption<K = string> {
   key: NonNullable<K>;
@@ -16,12 +38,22 @@ export interface IDropDownProps<K> {
   onRenderSelectedOption?: (
     option: IDropDownOption<K>["key"]
   ) => React.JSX.Element;
-  menuProps?: Pick<React.HTMLAttributes<HTMLElement>, "className">;
+  menuProps?: Pick<React.HTMLAttributes<HTMLElement>, "className"> & {
+    position?: "left" | "right";
+  };
+  buttonProps?: Omit<React.ComponentProps<"input">, "color"> &
+    TDowndownButtonVariants;
 }
 
 export function Dropdown<K = string>(props: IDropDownProps<K>) {
-  const { options, defaultKey, onSelect, onRenderSelectedOption, menuProps } =
-    props;
+  const {
+    options,
+    defaultKey,
+    menuProps,
+    buttonProps,
+    onSelect,
+    onRenderSelectedOption,
+  } = props;
   const [selectedOption, setSelectedOption] = useState<
     IDropDownOption<K>["key"] | undefined
   >(defaultKey || undefined);
@@ -36,7 +68,13 @@ export function Dropdown<K = string>(props: IDropDownProps<K>) {
   return (
     <div className="relative inline-block text-left">
       <button
-        className="flex items-center space-x-2 bg-white text-black px-3 py-2 rounded shadow-md focus:outline-none"
+        className={cn(
+          dropDownButtonVariants({
+            variant: buttonProps?.variant,
+            color: buttonProps?.color,
+          }),
+          buttonProps?.className
+        )}
         onClick={() => setIsOpenDropdown((prev) => !prev)}
       >
         {onRenderSelectedOption ? (
@@ -58,7 +96,8 @@ export function Dropdown<K = string>(props: IDropDownProps<K>) {
         <div
           className={cn(
             "absolute mt-2 w-40 bg-white border border-gray-300 rounded shadow-lg z-10",
-            menuProps?.className
+            menuProps?.className,
+            menuProps?.position === "left" ? "left-0" : "right-0"
           )}
         >
           {options.map((option) => (

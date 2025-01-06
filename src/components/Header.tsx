@@ -58,47 +58,55 @@ export default function Header(props: IHeaderProps) {
     [changeLocale]
   );
 
-  const renderChangeLocal = useCallback(() => {
-    const LanguageOptions: Array<IDropDownOption<TLocale>> =
-      LANGUAGE_OPTION.map((lang) => ({
-        key: lang.key,
-        value: (
+  const renderChangeLocal = useCallback(
+    (
+      buttonProps?: React.ComponentProps<typeof Dropdown>["buttonProps"],
+      menuProps?: React.ComponentProps<typeof Dropdown>["menuProps"]
+    ) => {
+      const LanguageOptions: Array<IDropDownOption<TLocale>> =
+        LANGUAGE_OPTION.map((lang) => ({
+          key: lang.key,
+          value: (
+            <div className="flex flex-row items-center gap-2">
+              <Image
+                src={lang.flag}
+                alt={`${lang.value} flag`}
+                width={20}
+                height={20}
+              />
+              <span>{languageI18n(lang.value)}</span>
+            </div>
+          ),
+        }));
+      const onRenderSelectedOption = (key: IDropDownOption<TLocale>["key"]) => {
+        const option = LANGUAGE_OPTION.find((lang) => lang.key === key);
+        return option ? (
           <div className="flex flex-row items-center gap-2">
             <Image
-              src={lang.flag}
-              alt={`${lang.value} flag`}
+              src={option.flag}
+              alt={`${option.value} flag`}
               width={20}
               height={20}
+              loading="eager"
             />
-            <span>{languageI18n(lang.value)}</span>
           </div>
-        ),
-      }));
-    const onRenderSelectedOption = (key: IDropDownOption<TLocale>["key"]) => {
-      const option = LANGUAGE_OPTION.find((lang) => lang.key === key);
-      return option ? (
-        <div className="flex flex-row items-center gap-2">
-          <Image
-            src={option.flag}
-            alt={`${option.value} flag`}
-            width={20}
-            height={20}
-          />
-        </div>
-      ) : (
-        <></>
+        ) : (
+          <></>
+        );
+      };
+      return (
+        <Dropdown<TLocale>
+          buttonProps={buttonProps}
+          options={LanguageOptions}
+          defaultKey={locale}
+          menuProps={menuProps}
+          onSelect={onChangeLanguage}
+          onRenderSelectedOption={onRenderSelectedOption}
+        />
       );
-    };
-    return (
-      <Dropdown<TLocale>
-        options={LanguageOptions}
-        defaultKey={locale}
-        menuProps={{ className: "right-0" }}
-        onSelect={onChangeLanguage}
-        onRenderSelectedOption={onRenderSelectedOption}
-      />
-    );
-  }, [languageI18n, locale, onChangeLanguage]);
+    },
+    [languageI18n, locale, onChangeLanguage]
+  );
 
   const renderRoutes = useCallback(
     () =>
@@ -109,7 +117,15 @@ export default function Header(props: IHeaderProps) {
               <a href={ROUTES[key as ERoute] ?? "/"}>{value}</a>
             </li>
           ))}
-          {renderChangeLocal()}
+          {renderChangeLocal(
+            {
+              variant: "ghost",
+              className: "text-white",
+            },
+            {
+              position: "right",
+            }
+          )}
         </nav>
       ) : (
         <span
@@ -130,7 +146,13 @@ export default function Header(props: IHeaderProps) {
     return shouldRender ? (
       <div className="fixed top-0 w-screen h-full bg-white text-black flex flex-col items-center gap-4 py-4 font-heading font-bolder text-heading-md">
         <div className="flex flex-row justify-between items-center w-full px-4 pb-[40px]">
-          {renderChangeLocal()}
+          {renderChangeLocal(
+            {
+              variant: "outline",
+              className: "border-[#AFAFAF]",
+            },
+            { position: "left" }
+          )}
           <span
             className="pointer-events-auto"
             onClick={() => {
@@ -174,6 +196,7 @@ export default function Header(props: IHeaderProps) {
           alt="File icon"
           width={mdWidth ? 108 : 68}
           height={mdWidth ? 64 : 40}
+          loading="eager"
         />
         {renderRoutes()}
       </div>
