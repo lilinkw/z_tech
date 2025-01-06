@@ -1,8 +1,11 @@
 "use client";
 
 import { Icons, TIconKeys } from "@/components/ui/Icons";
+import { useMediaQuery } from "@/hooks";
+import { EScreenSize } from "@/lib/screen";
 import { cn } from "@/lib/utils";
 import { useScopedI18n } from "@/locales/client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { createElement } from "react";
 
@@ -32,6 +35,7 @@ export const About = ({ stats }: IAboutProps) => {
   const gridWidth = 560;
   const gap = 40;
   const gridWidthWithGap = gridWidth * 2 + gap;
+  const mdWidth = useMediaQuery(`(min-width: ${EScreenSize.MD})`);
 
   const benefitsKey: Array<TBenefit> = [
     { key: "info_1", icon: "CalenderTick" },
@@ -120,7 +124,28 @@ export const About = ({ stats }: IAboutProps) => {
       <div className={`sm:w-[${gridWidthWithGap}x]`}>
         <div className="relative w-full h-auto flex flex-col justify-center items-center">
           <div className="z-10">
-            <Image src="/wizard.svg" alt="Wizard" width={437} height={533} />
+            <motion.div
+              initial={{ x: "180%", scale: 0.5 }}
+              whileInView={{ x: 0, scale: 1 }}
+              // transition={{ duration: 0.8, type: "spring" }}
+              viewport={{ once: true }}
+              animate={{ y: [0, -20, 0] }}
+              transition={{
+                y: {
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                },
+              }}
+            >
+              <Image
+                src="/wizard.svg"
+                alt="Wizard"
+                width={mdWidth ? 437 : 300}
+                height={mdWidth ? 533 : 243}
+              />
+            </motion.div>
           </div>
 
           <div className="relative bottom-[32px] md:bottom-[100px]">
@@ -130,7 +155,6 @@ export const About = ({ stats }: IAboutProps) => {
       </div>
     </aside>
   );
-
   return (
     <section
       className={cn(
