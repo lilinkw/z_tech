@@ -35,11 +35,11 @@ https://github.com/lilinkw/z_tech
 
 ### Desktop
 
-[!desktop](z-tech-desktop.png)
+[!desktop](z-tech-desktop-top-page.png)
 
 ### Mobile
 
-[!mobile](z-tech-mobile.png)
+[!mobile](z-tech-mobile-top-page.png)
 
 
 ## Getting Started
