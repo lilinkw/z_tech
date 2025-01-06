@@ -99,7 +99,7 @@ ICarouselProps) => {
       className={cn("flex items-center relative full", container?.className)}
     >
       <button
-        className="absolute left-[32%] xl:left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-[10px] h-fit hover:bg-gray-300 px-2 py-2"
+        className="absolute left-[36%] xl:left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-[10px] h-fit hover:bg-gray-300 px-2 py-2"
         style={{
           color: canGoBack ? "black" : "gray",
           pointerEvents: canGoBack ? "auto" : "none",
@@ -121,7 +121,7 @@ ICarouselProps) => {
       </div>
 
       <button
-        className="absolute right-[32%] xl:right-0 top-1/2 -translate-y-1/2 z-10  bg-white rounded-[10px] h-fit hover:bg-gray-300 px-2 py-2"
+        className="absolute right-[36%] xl:right-0 top-1/2 -translate-y-1/2 z-10  bg-white rounded-[10px] h-fit hover:bg-gray-300 px-2 py-2"
         style={{
           color: canGoNext ? "black" : "gray",
           pointerEvents: canGoNext ? "auto" : "none",

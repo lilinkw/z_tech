@@ -18,7 +18,7 @@ export const Background = () => {
         )}
       ></div>
       <Image
-        className={cn("absolute top-[65%] left-[30%] lg:top-0 lg:left-0")}
+        className={cn("absolute top-[65%] left-[26%] lg:top-0 lg:left-0")}
         aria-hidden
         src="/fairy.svg"
         alt="fairy"
