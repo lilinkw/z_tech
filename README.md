@@ -13,6 +13,7 @@ https://z-tech-gilt.vercel.app
 https://github.com/lilinkw/z_tech
 
 ### What have been done
+
 - Using App routing from `NextJs` 15
 - Using `Next/Image` to loading image
 - Using `tailwindcss` to config and style `css`
@@ -23,8 +24,12 @@ https://github.com/lilinkw/z_tech
 - Responsive Style for multiple device using `tailwindcss`
 - Utilize `React hooks` as long as `custom hooks`
 - Utilize `Vercel` and `GitHub` for CICD
+
 ### What have not been done
+
 - Utilize `meta data` for better SEO. Why? Have not find a way to work with new library `next-international`
+- Responsive Style for only for **two device** is consider `Iphone XS` and `Desktop 24inch`
+- Style for background image is not perfect
 
 ## Web page first look
 
